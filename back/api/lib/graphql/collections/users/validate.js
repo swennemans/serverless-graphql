@@ -25,6 +25,6 @@ let validate = {
 
 
 module.exports = (data) => {
-  Object.keys(data).forEach((d) => {validate[d](data[d])});
-  return Promise.resolve();
+  const validations = Object.keys(data).map((d) => (validate[d](data[d])));
+  return Promise.each(validations, (res) => (res));
 };
